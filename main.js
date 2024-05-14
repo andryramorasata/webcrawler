@@ -1,9 +1,15 @@
-const {getURLsFromHTML} = require('./crawl.js')
-const {htmlString} = require('./testHTML.js')
+const { getURLsFromHTML, crawlPage } = require('./crawl.js');
+const { argv, exit, execArgv } = require('node:process');
 
-function run(){
-	const result = getURLsFromHTML(htmlString, "https://blog.boot.dev")
-	console.log(result)
+async function main() {
+  if (argv.length != 3) {
+    console.log('Only 1 argument of BASE_URL is allowed');
+    exit(1);
+  }
+  const baseURL = argv[2];
+  console.log(`starting crawler at ${argv[2]}...`);
+  const report = await crawlPage(argv[2], baseURL);
+  console.log(`${JSON.stringify(report)}`);
 }
 
-run();
+main();
