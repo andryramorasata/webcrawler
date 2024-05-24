@@ -5,7 +5,7 @@ const {
   getHTML,
 } = require('./crawl.js');
 const { htmlString } = require('./testHTML.js');
-
+const {sortReport} = require('./report.js');
 test('https://blog.boot.dev/clean-code/give-up-sooner/ to equal https://blog.boot.dev/clean-code/give-up-sooner', () => {
   expect(
     normalizeURL(
@@ -62,3 +62,17 @@ test('should return a string', async () => {
   const htmlString = await getHTML('https://bench.co/blog');
   expect(typeof htmlString).toBe('string');
 });
+
+let testCount = {
+ 'a': 1000,
+ 'b':24,
+ 'c':42,
+ 'd':1,
+ 'e':6,
+ 'f':50
+};
+
+test('count array is sorted ascending order', () => {
+  expect(sortReport(testCount)).toEqual({'d':1, 'e':6, 'b':24, 'c':42, 'f':50, 'a':1000})
+  });
+
