@@ -1,26 +1,22 @@
 
 function printReport(pages){
   const sorted = sortReport(pages);
-  for (let page of sorted){
-    console.log(`Found ${page.count} internal links to ${url}`)
+  for (let page in sorted){
+    if (page){
+    console.log(`Found ${page} internal links to ${sorted[page]}`)
+    }
   }
 }
 
 function sortReport(pages){
   let arrOfPages = [];
-  let result = {}; 
-  let keys = Object.keys(pages);
-  for (let link of keys){
-    console.log(pages[link]);
-    arrOfPages.push({[link]:pages[link]});
+  for (let link in pages){
+    arrOfPages.push([link, pages[link]]);
   }
-  arrOfPages.sort((a,b) => { a - b });
-
-  for (let page of arrOfPages){
-   result[Object.keys(page)[0]] = Object.values(page)[0]
-  }
-
-  return result 
+  arrOfPages.sort((a,b) => {
+    return a[1]- b[1]});
+  
+  return Object.fromEntries(arrOfPages)
 }
 
 module.exports = {

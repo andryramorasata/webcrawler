@@ -3,7 +3,7 @@ const { JSDOM } = require('jsdom');
 async function crawlPage(
   currentURL,
   baseURL,
-  pages = { brokenLinks: [] }
+  pages = {}
 ) {
   const current = new URL(currentURL);
   const base = new URL(baseURL);
@@ -24,7 +24,7 @@ async function crawlPage(
       pages = await crawlPage(link, baseURL, pages);
     }
   } catch (err) {
-    pages.brokenLinks.push(currentURL);
+    console.log(`error thrown: ${err} for ${currentURL}`)
   } finally {
     return pages;
   }
@@ -54,7 +54,7 @@ async function getHTML(url) {
     const results = await response.text();
     return results;
   } catch (err) {
-    console.log(`an error was thrown: ${err}`);
+    console.log(`an error was thrown: ${err} for ${url}`);
     return results;
   }
 }

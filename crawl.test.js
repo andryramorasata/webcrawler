@@ -73,6 +73,7 @@ let testCount = {
 };
 
 test('count array is sorted ascending order', () => {
-  expect(sortReport(testCount)).toEqual({'d':1, 'e':6, 'b':24, 'c':42, 'f':50, 'a':1000})
+  expect(JSON.stringify(sortReport(testCount))).toBe(JSON.stringify({'d':1, 'e':6, 'b':24, 'c':42, 'f':50, 'a':1000}))
+
   });
 
