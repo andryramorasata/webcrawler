@@ -52,6 +52,7 @@ async function getHTML(url) {
   try {
     const response = await fetch(webpageRequest, myInit);
     const results = await response.text();
+    console.log(`${url} returns ${response.status}`)
     return results;
   } catch (err) {
     console.log(`an error was thrown: ${err} for ${url}`);
